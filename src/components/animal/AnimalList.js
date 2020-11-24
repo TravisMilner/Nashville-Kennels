@@ -2,18 +2,32 @@ import React, {useContext, useEffect } from "react"
 import {AnimalContext} from "./AnimalDataProvider"
 import { Animal } from "./Animal"
 import "./Animal.css"
+import { LocationContext } from "../location/LocationDataProvider"
+import { CustomerContext } from "../customer/CustomerDataProvider"
 
 export const AnimalList = () => {
     const { animals, getAnimals } = useContext(AnimalContext)
+    const { locations, getLocations } = useContext(LocationContext)
+    const { customers, getCustomers } = useContext(CustomerContext)
 
     useEffect(() => {
-        getAnimals()
+        getLocations()
+        .then(getCustomers)
+        .then(getAnimals)
     }, [])
 
     return (
         <div className = "animals">
             {
-                animals.map(ani => <Animal key = {ani.id} animal={ani} />)
+                animals.map(animal => {
+                    const owner = customers.find(c => c.id === animal.customerId)
+                    const clinic = locations.find(l => l.id === animal.locationId)
+                
+                    return <Animal key={animal.id}
+                                location={clinic}
+                                customer={owner}
+                                animal={animal} />
+                })
             }
         </div>
     )
