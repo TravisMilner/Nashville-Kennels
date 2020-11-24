@@ -4,6 +4,8 @@ import { LocationProvider } from "./location/LocationDataProvider"
 import "./Kennel.css"
 import { EmployeeProvider } from "./employee/EmployeeDataProvider"
 import { EmployeeList } from "./employee/EmployeeList"
+import { CustomerProvider } from "./customer/CustomerDataProvider"
+import { CustomerList } from "./customer/CustomerList"
 
 export const Kennel = () => (
     <>
@@ -19,5 +21,10 @@ export const Kennel = () => (
         <EmployeeProvider>
             <EmployeeList />
         </EmployeeProvider>
+
+        <h2>Customers</h2>
+        <CustomerProvider>
+                <CustomerList />
+        </CustomerProvider>
     </>
 )
