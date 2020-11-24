@@ -28,7 +28,7 @@ export const ApplicationViews = (props) => {
                     </CustomerProvider>
                 </LocationProvider>
             </AnimalProvider>
-            
+
             <CustomerProvider>
                 <Route path = "/customers">
                     <CustomerList />
@@ -36,10 +36,13 @@ export const ApplicationViews = (props) => {
             </CustomerProvider>
 
             <EmployeeProvider>
-                <Route path = "/employees">
-                    <EmployeeList />
-                </Route>
+                <LocationProvider>
+                    <Route path = "/employees">
+                        <EmployeeList />
+                    </Route>
+                </LocationProvider>
             </EmployeeProvider>
+
         </>
     )
 }
