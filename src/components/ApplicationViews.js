@@ -8,6 +8,7 @@ import { CustomerProvider } from "./customer/CustomerDataProvider"
 import { CustomerList } from "./customer/CustomerList"
 import { EmployeeProvider } from "./employee/EmployeeDataProvider"
 import { EmployeeList } from "./employee/EmployeeList"
+import {EmployeeForm} from "./employee/EmployeeForm"
 
 export const ApplicationViews = (props) => {
     return (
@@ -30,18 +31,23 @@ export const ApplicationViews = (props) => {
             </AnimalProvider>
 
             <CustomerProvider>
-                <Route path = "/customers">
+                <Route path="/customers">
                     <CustomerList />
                 </Route>
             </CustomerProvider>
-
+            <AnimalProvider>
             <EmployeeProvider>
                 <LocationProvider>
-                    <Route path = "/employees">
-                        <EmployeeList />
-                    </Route>
+                    <Route exact path="/employees" render={
+                        props => <EmployeeList {...props} />
+                    } />
+
+                    <Route exact path="/employees/create" render={
+                        props => <EmployeeForm {...props} />
+                    } />
                 </LocationProvider>
-            </EmployeeProvider>
+        </EmployeeProvider>
+        </AnimalProvider>
 
         </>
     )
