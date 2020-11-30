@@ -1,5 +1,5 @@
-import React, {useContext, useEffect } from "react"
-import {AnimalContext} from "./AnimalDataProvider"
+import React, { useContext, useEffect } from "react"
+import { AnimalContext } from "./AnimalDataProvider"
 import { Animal } from "./Animal"
 import "./Animal.css"
 import { LocationContext } from "../location/LocationDataProvider"
@@ -12,21 +12,21 @@ export const AnimalList = () => {
 
     useEffect(() => {
         getLocations()
-        .then(getCustomers)
-        .then(getAnimals)
+            .then(getCustomers)
+            .then(getAnimals)
     }, [])
 
     return (
-        <div className = "animals">
+        <div className="animals">
             {
                 animals.map(animal => {
                     const owner = customers.find(c => c.id === animal.customerId)
                     const clinic = locations.find(l => l.id === animal.locationId)
-                
+
                     return <Animal key={animal.id}
-                                location={clinic}
-                                customer={owner}
-                                animal={animal} />
+                        location={clinic}
+                        customer={owner}
+                        animal={animal} />
                 })
             }
         </div>
