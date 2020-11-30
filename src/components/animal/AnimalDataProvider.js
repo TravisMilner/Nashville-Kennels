@@ -11,7 +11,7 @@ export const AnimalProvider = (props) => {
         .then(setAnimals)
     }
 
-    const addAnimals = () => {
+    const addAnimals = (animals) => {
         return fetch ("http://localhost:8088/animals", {
             method: "POST",
             headers: {
