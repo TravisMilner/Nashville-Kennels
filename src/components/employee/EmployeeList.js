@@ -3,6 +3,7 @@ import { EmployeeContext } from "./EmployeeDataProvider"
 import { Employee } from "./Employee"
 import "./Employee.css"
 import { LocationContext } from "../location/LocationDataProvider"
+import {Link} from "react-router-dom"
 
 export const EmployeeList = (props) => {
     const { employees, getEmployees } = useContext(EmployeeContext)
@@ -22,15 +23,13 @@ export const EmployeeList = (props) => {
 
            
             {
-                employees.map(emp => {
-                    const clinic = locations.find(l => l.id === emp.locationId)
-
-                    return <Employee key={emp.id}
-                        location={clinic}
-                        employee={emp}
+                employees.map(employee => {
+                    return <Link key={employee.id} to={`/employees/${employee.id}`}>
+                        <h3>{employee.name}</h3>
+                    </Link>
 
 
-                    />
+                    
                 })
             }
             </article>
