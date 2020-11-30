@@ -9,7 +9,7 @@ import { AnimalContext } from "./AnimalDataProvider"
 
 export const AnimalForm = (props) => {
     const { locations, getLocations } = useContext(LocationContext)
-    const { animals, addAnimals } = useContext(AnimalContext)
+    const {  addAnimals } = useContext(AnimalContext)
 
     const name = useRef(null)
     const location = useRef(null)
