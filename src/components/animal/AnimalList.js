@@ -2,39 +2,32 @@ import React, { useContext, useEffect } from "react"
 import { AnimalContext } from "./AnimalDataProvider"
 import { Animal } from "./Animal"
 import "./Animal.css"
-import { LocationContext } from "../location/LocationDataProvider"
-import { CustomerContext } from "../customer/CustomerDataProvider"
 
-export const AnimalList = (props) => {
-    const { animals, getAnimals } = useContext(AnimalContext)
-    const { locations, getLocations } = useContext(LocationContext)
-    const { customers, getCustomers } = useContext(CustomerContext)
 
-    useEffect(() => {
-        getLocations()
-            .then(getCustomers)
-            .then(getAnimals)
-    }, [])
 
-    return (
-        <div className="animals">
-            <div className = "animals">
+
+    export const AnimalList = ({ history }) => {
+        const { getAnimals, animals } = useContext(AnimalContext)
+    
+        // Initialization effect hook -> Go get animal data
+        useEffect(()=>{
+            getAnimals()
+        }, [])
+    
+        return (
+            <>
                 <h1>Animals</h1>
-                <button onClick={() => props.history.push("/animals/create")}>
-                    Add Animal
+    
+                <button onClick={() => history.push("/animals/create")}>
+                    Make Reservation
                 </button>
-            </div>
-            {
-                animals.map(animal => {
-                    const owner = customers.find(c => c.id === animal.customerId)
-                    const clinic = locations.find(l => l.id === animal.locationId)
-                        
-                    return <Animal key={animal.id}
-                        location={clinic}
-                        customer={owner}
-                        animal={animal} />
-                })
-            }
-        </div>
-    )
-}
+                <div className="animals">
+                    {
+                        animals.map(animal => {
+                            return <Animal key={animal.id} animal={animal} />
+                        })
+                    }
+                </div>
+            </>
+        )
+    }
