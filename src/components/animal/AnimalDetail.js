@@ -3,7 +3,7 @@ import { AnimalContext } from "./AnimalDataProvider"
 import "./Animal.css"
 
 export const AnimalDetails = (props) => {
-    const { releaseAnimal, getAnimalById } = useContext(AnimalContext)
+    const { releaseAnimal, animals, getAnimals, getAnimalById } = useContext(AnimalContext)
 
     const [animal, setAnimal] = useState({ location: {}, customer: {}})
 
@@ -21,7 +21,7 @@ export const AnimalDetails = (props) => {
             <div className="animal__owner">Customer: {animal.customer.name}</div>
             <button onClick={
                 () => {
-                    releaseAnimal(animal)
+                    releaseAnimal(chosenAnimalId)
                         .then(() => {
                             props.history.push("/animals")
                         })
